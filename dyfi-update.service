@@ -1,0 +1,10 @@
+[Unit]
+Description=dyfi-update
+[Service]
+Type=simple
+PrivateTmp=false
+ExecStart=/usr/bin/perl /usr/local/bin/dyfi-update.pl -f /usr/local/etc/dyfi-update.conf
+ExecStop=/bin/kill `pidof perl`
+
+[Install]
+WantedBy=multi-user.target
