@@ -1,11 +1,19 @@
-# dyfi-update
-dyfi-update modified to work as systemd service
+# Current modifications
+SSL support taken from fluks: https://github.com/fluks/dyfi-update-ssl-pl
+
+Systemd support added meaning that you can just install with make and then run:
+
+- systemctl start dyfi-update.service
+- systemctl restart dyfi-update.service
+- systemctl stop dyfi-update.service
+- systemctl status dyfi-update.service
 
 Currently needs to run with sudo.
 
-Could be changed like https://askubuntu.com/questions/676007/how-do-i-make-my-systemd-service-run-via-specific-user-and-start-on-boot
+# TODO:
+- Systemd Could be changed like https://askubuntu.com/questions/676007/how-do-i-make-my-systemd-service-run-via-specific-user-and-start-on-boot
 
-
+# dyfi-update
 dyfi-update.pl 1.2.0
 by dy.fi admins, admin at dy dot fi
 
