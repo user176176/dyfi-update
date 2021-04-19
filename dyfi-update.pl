@@ -92,7 +92,7 @@ require 5.002;
 use Socket;
 use strict;
 use Fcntl qw(:flock);
-
+use IO::Socket::SSL;
 use POSIX qw( strftime );
 
 my ($debug, $log, $pidfile, $cfgfile,
@@ -115,7 +115,7 @@ $do_release = 0;
 # a transparent proxy)
 $update_host = 'www.dy.fi';
 $update_uri = '/nic/update';
-$update_port = 8180;
+$update_port = 443;
 # checkip server
 $checkip_host = 'checkip.dy.fi';
 $checkip_uri = '/';
@@ -334,7 +334,14 @@ sub htget {
 		error("Cannot connect to $ht_host:$ht_port: $!");
 		return;
 	}
-	
+
+        # turn socket to ssl socket only when credentials needed
+	if ($ht_user && $ht_passwd && !IO::Socket::SSL->start_SSL(\*SOCK)) {
+		my $err = IO::Socket::SSL::errstr();
+		error("Cannot upgrade socket to use IO::Socket::SSL: $err");
+		return;
+	}        
+
 	my($request)	= "GET $ht_uri HTTP/1.0\r\n"
 			. $basicauth
 			. "User-Agent: $me $version ($$)\r\n"
