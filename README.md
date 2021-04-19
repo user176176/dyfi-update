@@ -1,3 +1,13 @@
+#current modifications
+SSL support taken from fluks: https://github.com/fluks/dyfi-update-ssl-pl
+
+Systemd support added meaning that you can just install with make and then run (with sudo when needed):
+
+systemctl start dyfi-update.service
+systemctl restart dyfi-update.service
+systemctl stop dyfi-update.service
+systemctl status dyfi-update.service
+
 # dyfi-update
 dyfi-update modified to work as systemd service
 
